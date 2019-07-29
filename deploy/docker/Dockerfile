@@ -2,7 +2,7 @@ FROM BASEIMAGE
 
 COPY metrics-server /
 
-RUN adduser -D metrics-server
+COPY passwd /etc/passwd
 
 USER metrics-server
 

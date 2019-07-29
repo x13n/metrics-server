@@ -54,6 +54,9 @@ container-%: pkg/generated/openapi/zz_generated.openapi.go tmpdir-%
 	cp deploy/docker/Dockerfile $(TEMP_DIR)
 	sed -i -e "s|BASEIMAGE|$(BASEIMAGE)|g" $(TEMP_DIR)/Dockerfile
 
+	# Provide /etc/passwd with nonroot user
+	cp deploy/docker/passwd $(TEMP_DIR)
+
 	# run the actual build
 	docker build --pull -t $(PREFIX)/metrics-server-$*:$(VERSION) $(TEMP_DIR)
 
